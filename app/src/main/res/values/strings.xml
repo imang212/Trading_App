@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trading Dashboard</string>
+    <string name="nav_signals">Signals</string>
+    <string name="nav_orders">Orders</string>
+    <string name="nav_backtest">Backtest</string>
+    <string name="nav_correlation">Correlation</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="loading">Loading…</string>
+    <string name="no_data">No data available</string>
+    <string name="backtest_asset">Backtest Asset</string>
+    <string name="correlation_matrix">Correlation Matrix</string>
+    <string name="pearson_correlation_of_daily_returns_up_to_12_assets">Pearson correlation of daily % returns (up to 12 assets)</string>
+    <string name="_1">−1</string>
+    <string name="_0">0</string>
+</resources>

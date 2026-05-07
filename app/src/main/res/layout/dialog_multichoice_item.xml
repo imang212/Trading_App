@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Custom multi-choice list item for the asset selection dialog.
+    Replaces the system layout so we control text color (#F0F2FF)
+    and checkbox tint (accent_blue) regardless of Android version.
+-->
+<CheckedTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="16dp"
+    android:textColor="#F0F2FF"
+    android:textSize="15sp"
+    android:background="?android:attr/selectableItemBackground"
+    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    android:checkMarkTint="#4DA8E8"/>

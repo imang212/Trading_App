@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Signal colour bar (top accent) -->
+        <View
+            android:id="@+id/view_signal_bar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            tools:background="@color/buy_green" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:baselineAligned="false">
+            <!-- Row 1: Name + ticker + signal badge -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp"
+                android:baselineAligned="false">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_asset_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Gold" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_ticker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            tools:text="GC=F" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" · "
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"/>
+                        <TextView
+                            android:id="@+id/tv_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/accent_blue"
+                            android:textSize="11sp"
+                            tools:text="COMMODITY" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Signal + price -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/tv_signal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="2dp"
+                        tools:text="BUY"
+                        tools:textColor="@color/buy_green" />
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="$2,034.50" />
+
+                    <TextView
+                        android:id="@+id/tv_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        tools:text="+0.45%"
+                        tools:textColor="@color/buy_green" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Score bar (5 segments) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <View android:id="@+id/seg0" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
+                <View android:id="@+id/seg1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
+                <View android:id="@+id/seg2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
+                <View android:id="@+id/seg3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
+                <View android:id="@+id/seg4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="#3A3A3A" />
+
+            </LinearLayout>
+
+            <!-- Condition ticks row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:baselineAligned="false">
+
+                <TextView android:id="@+id/iv_cond_ma"   android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="11sp" android:gravity="center" android:text="MA" tools:textColor="@color/buy_green" />
+                <TextView android:id="@+id/iv_cond_rsi"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="11sp" android:gravity="center" android:text="RSI" tools:textColor="@color/buy_green" />
+                <TextView android:id="@+id/iv_cond_bb"   android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="11sp" android:gravity="center" android:text="BB" tools:textColor="@color/sell_red" />
+                <TextView android:id="@+id/iv_cond_macd" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="11sp" android:gravity="center" android:text="MACD" tools:textColor="@color/buy_green" />
+                <TextView android:id="@+id/iv_cond_atr"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="11sp" android:gravity="center" android:text="ATR" tools:textColor="@color/buy_green" />
+
+            </LinearLayout>
+
+            <!-- Indicators row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:baselineAligned="false">
+
+                <TextView android:id="@+id/tv_rsi"       android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:textSize="11sp" tools:text="RSI 65" />
+                <TextView android:id="@+id/tv_bb_pct"    android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:textSize="11sp" tools:text="BB% 0.82" />
+                <TextView android:id="@+id/tv_macd_hist" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:textSize="11sp" tools:text="MACD 0.12" />
+                <TextView android:id="@+id/tv_vol_ratio" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:textSize="11sp" tools:text="Vol +45%" />
+
+            </LinearLayout>
+
+            <!-- Order levels row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <TextView android:id="@+id/tv_buy_limit"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/buy_green"  android:textSize="11sp" tools:text="BL $2,020" />
+                <TextView android:id="@+id/tv_stop_loss"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/sell_red"   android:textSize="11sp" tools:text="SL $2,010" />
+                <TextView android:id="@+id/tv_take_profit" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/accent_blue" android:textSize="11sp" tools:text="TP $2,050" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

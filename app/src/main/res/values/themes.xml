@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TradingApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorAlertDialogListItem">@android:color/white</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_card</item>
+        <item name="android:spinnerStyle">@style/Widget.TradingApp.Spinner</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.TradingApp.DropDownListView</item>
+        <item name="android:popupMenuStyle">@style/Widget.TradingApp.PopupMenu</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Filter</item>
+    </style>
+    <!-- Settings activity gets a lighter theme so PreferenceFragment text is readable -->
+    <style name="Theme.TradingApp.Settings" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorPrimaryDark">@color/bg_card</item>
+        <item name="android:colorBackground">@color/bg_card</item>
+        <item name="android:windowBackground">@color/bg_card</item>
+        <item name="android:statusBarColor">@color/bg_card</item>
+        <item name="android:navigationBarColor">@color/bg_card</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.TradingApp</item>
+        <item name="android:spinnerStyle">@style/Widget.TradingApp.Spinner</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.TradingApp.DropDownListView</item>
+    </style>
+    <!-- PreferenceFragment theming -->
+    <style name="PreferenceTheme.TradingApp" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:background">@color/bg_card</item>
+        <item name="android:listDivider">@color/bg_card2</item>
+    </style>
+    <style name="Widget.TradingApp.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:popupBackground">@color/bg_spinner_dropdown</item>
+        <item name="android:background">@color/bg_spinner</item>
+    </style>
+    <style name="Widget.TradingApp.DropDownListView" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:background">@color/bg_spinner_dropdown</item>
+        <item name="android:divider">@color/bg_card2</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+    <style name="Widget.TradingApp.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/bg_spinner_dropdown</item>
+    </style>
+    <!-- Section header text style used across multiple layouts -->
+    <style name="SectionHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+    <!-- Custom Dark Dialog Theme -->
+    <style name="Widget.TradingApp.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <!-- Dialog background -->
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <!-- Title text -->
+        <item name="materialAlertDialogTitleTextStyle">@style/TradingApp.Dialog.TitleText</item>
+        <!-- Body / list text -->
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorAlertDialogListItem">@color/text_primary</item>
+        <!-- Checkbox tint -->
+        <item name="colorControlActivated">@color/accent_blue</item>
+        <item name="colorControlNormal">@color/text_secondary</item>
+        <!-- List row background — must be dark so text is readable -->
+        <item name="android:background">@color/bg_card</item>
+        <!-- Button text -->
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.TradingApp.Button.TextButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.TradingApp.Button.TextButton</item>
+    </style>
+    <style name="TradingApp.Dialog.TitleText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="Widget.TradingApp.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/accent_blue</item>
+    </style>
+    <style name="TradingApp.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorOnPrimary">@color/bg_dark</item>
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Button text (OK / Cancel) inherits colorPrimary in Material date picker -->
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.TradingApp.Button.TextButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.TradingApp.Button.TextButton</item>
+        <item name="materialCalendarStyle">@style/TradingApp.DatePicker.Calendar</item>
+    </style>
+    <style name="TradingApp.DatePicker.Calendar" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:windowBackground">@color/bg_card</item>
+        <item name="backgroundTint">@color/bg_card</item>
+    </style>
+</resources>

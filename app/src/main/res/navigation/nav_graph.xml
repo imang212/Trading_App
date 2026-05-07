@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_signals">
+    <!-- ── Signals tab ─────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_signals"
+        android:name="com.trading.trading_app.ui.overview.SignalOverviewFragment"
+        android:label="Signals">
+        <action
+            android:id="@+id/action_signals_to_detail"
+            app:destination="@id/nav_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <!-- ── Detail screen ──────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_detail"
+        android:name="com.trading.trading_app.ui.detail.AssetDetailFragment"
+        android:label="Detail">
+        <argument
+            android:name="asset_name"
+            app:argType="string"/>
+        <argument
+            android:name="interval"
+            app:argType="string"
+            android:defaultValue="1d"/>
+    </fragment>
+    <!-- ── Orders tab ─────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.trading.trading_app.ui.backtest.OrderLevelsFragment"
+        android:label="Order Levels"/>
+    <!-- ── Backtest tab ────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_backtest"
+        android:name="com.trading.trading_app.ui.backtest.BacktestFragment"
+        android:label="Backtest"/>
+    <!-- ── Correlation tab ────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_correlation"
+        android:name="com.trading.trading_app.ui.correlation.CorrelationFragment"
+        android:label="Correlation"/>
+
+</navigation>

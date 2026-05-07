@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_signals"
+        android:icon="@drawable/ic_signals"
+        android:title="@string/nav_signals"/>
+
+    <item
+        android:id="@+id/nav_orders"
+        android:icon="@drawable/ic_orders"
+        android:title="@string/nav_orders"/>
+
+    <item
+        android:id="@+id/nav_backtest"
+        android:icon="@drawable/ic_backtest"
+        android:title="@string/nav_backtest"/>
+
+    <item
+        android:id="@+id/nav_correlation"
+        android:icon="@drawable/ic_correlation"
+        android:title="@string/nav_correlation"/>
+
+</menu>

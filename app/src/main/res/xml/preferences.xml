@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="Trading">
+        <EditTextPreference
+            android:key="capital"
+            android:title="Capital per Asset (USD)"
+            android:summary="Used for position sizing and risk calculation"
+            android:defaultValue="10000"
+            android:inputType="numberDecimal"/>
+        <ListPreference
+            android:key="default_interval"
+            android:title="Default Chart Interval"
+            android:entries="@array/interval_labels"
+            android:entryValues="@array/interval_values"
+            android:defaultValue="1d"
+            android:summary="%s"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Data">
+        <ListPreference
+            android:key="refresh_minutes"
+            android:title="Background Refresh"
+            android:entries="@array/refresh_labels"
+            android:entryValues="@array/refresh_values"
+            android:defaultValue="30"
+            android:summary="%s"/>
+        <SwitchPreferenceCompat
+            android:key="wifi_only"
+            android:title="Refresh on Wi-Fi Only"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>

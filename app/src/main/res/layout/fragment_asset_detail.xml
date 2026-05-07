@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:indeterminate="true"
+        app:indicatorColor="@color/accent_blue"/>
+
+    <TextView
+        android:id="@+id/tv_detail_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/sell_red"
+        android:padding="24dp"
+        android:visibility="gone"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:paddingBottom="40dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- ── Header card ─────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_detail_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_primary"
+                                android:textSize="26sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/tv_detail_change"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="end">
+
+                            <TextView
+                                android:id="@+id/tv_detail_signal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="22sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/tv_detail_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+
+                            <TextView
+                                android:id="@+id/tv_detail_atr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Context badges -->
+                    <TextView android:id="@+id/tv_bb_context"   android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="8dp"/>
+                    <TextView android:id="@+id/tv_rsi_context"  android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="2dp"/>
+                    <TextView android:id="@+id/tv_macd_context" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/text_secondary" android:textSize="12sp" android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Candlestick chart ──────────────────────────────── -->
+            <TextView style="@style/SectionHeader" android:text="Price · Bollinger · EMA · Signals"/>
+
+            <com.github.mikephil.charting.charts.CombinedChart
+                android:id="@+id/candle_chart"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- ── RSI chart ─────────────────────────────────────── -->
+            <TextView style="@style/SectionHeader" android:text="RSI"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/rsi_chart"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- ── MACD chart ────────────────────────────────────── -->
+            <TextView style="@style/SectionHeader" android:text="MACD"/>
+
+            <com.github.mikephil.charting.charts.CombinedChart
+                android:id="@+id/macd_chart"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- ── ATR chart ─────────────────────────────────────── -->
+            <TextView style="@style/SectionHeader" android:text="ATR (Volatility)"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/atr_chart"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- ── Price levels card ─────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView style="@style/SectionHeader" android:text="Order Levels"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="6dp">
+                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Buy Limit" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_buy_limit" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/buy_green" android:textSize="13sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
+                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Stop Loss" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_stop_loss" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/sell_red" android:textSize="13sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
+                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="TP1" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_tp1" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/accent_blue" android:textSize="13sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
+                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="TP2 / BB↑" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_sell_target" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/accent_purple" android:textSize="13sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
+                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Risk/Trade" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_risk_usd" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/neu_yellow" android:textSize="13sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Indicator status table ────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:showDividers="middle">
+                    <TextView style="@style/SectionHeader" android:text="Indicator Status"/>
+                    <include android:id="@+id/row_m_a"   layout="@layout/item_indicator_row"/>
+                    <include android:id="@+id/row_rsi"   layout="@layout/item_indicator_row"/>
+                    <include android:id="@+id/row_bb"    layout="@layout/item_indicator_row"/>
+                    <include android:id="@+id/row_macd"  layout="@layout/item_indicator_row"/>
+                    <include android:id="@+id/row_atr"   layout="@layout/item_indicator_row"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- ── Speed & Volume card ───────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView style="@style/SectionHeader" android:text="Speed · Volume · Divergence"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ROC (10)" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_roc" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_primary" android:textSize="13sp"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ATR Δ" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_atr_chg" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_primary" android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Body Ratio" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_body_ratio" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_primary" android:textSize="13sp"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Vol vs Avg" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_vol_ratio_detail" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_primary" android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="OBV Signal" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                        <TextView android:id="@+id/tv_obv_signal" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="3" android:textColor="@color/accent_blue" android:textSize="13sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+                <!-- Error banner -->
+                <TextView
+                    android:id="@+id/tv_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/sell_red_dim"
+                    android:padding="8dp"
+                    android:textColor="@color/sell_red"
+                    android:visibility="gone"
+                    android:layout_marginBottom="8dp"/>
+                <!-- Summary cards row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+                    <include layout="@layout/card_summary_stat"
+                        android:id="@+id/card_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"/>
+                    <include layout="@layout/card_summary_stat"
+                        android:id="@+id/card_buy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"/>
+                    <include layout="@layout/card_summary_stat"
+                        android:id="@+id/card_sell"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"/>
+                    <include layout="@layout/card_summary_stat"
+                        android:id="@+id/card_neu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+                <!-- ── Capital + Backtest date inputs ─────────────── -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="@color/bg_card"
+                    app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PORTFOLIO SETTINGS"
+                            style="@style/SectionHeader"
+                            android:layout_marginBottom="10dp"/>
+                        <!-- Capital row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Initial Capital (USD)"
+                                android:textColor="@color/text_secondary"
+                                app:strokeColor="@color/accent_blue"
+                                android:textSize="13sp"/>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                                app:boxStrokeColor="@color/accent_blue"
+                                app:hintTextColor="@color/text_secondary">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_initial_capital"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:text="10000"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="13sp"
+                                    android:padding="8dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <!-- Backtest start date row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Backtest Start Date"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp"/>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_pick_date"
+                                android:layout_width="130dp"
+                                android:layout_height="36dp"
+                                android:text="Pick Date"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_primary"
+                                app:backgroundTint="@color/bg_card2"
+                                app:strokeColor="@color/accent_blue"
+                                app:strokeWidth="1dp"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_selected_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No date selected (using 5-year default)"
+                            android:textColor="@color/text_hint"
+                            android:textSize="11sp"
+                            android:layout_marginBottom="8dp"/>
+                        <!-- Currency conversion row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Auto-convert to USD"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="13sp"/>
+                                <TextView
+                                    android:id="@+id/tv_currency_detected"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Detects asset currency automatically"
+                                    android:textColor="@color/text_hint"
+                                    android:textSize="11sp"/>
+                            </LinearLayout>
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switch_currency_convert"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                app:thumbTint="@color/accent_blue"
+                                app:trackTint="@color/bg_card2"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!-- Interval + filters row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Interval:"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:layout_marginEnd="6dp"/>
+                    <Spinner
+                        android:id="@+id/spinner_interval"
+                        android:layout_width="105dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/accent_blue"
+                        android:popupBackground="@color/bg_card2"
+                        android:spinnerMode="dropdown"/>
+                </LinearLayout>
+                <!-- Signal filter chips -->
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_buy"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BUY"
+                        android:tag="BUY"
+                        android:checked="true"
+                        app:chipBackgroundColor="@color/chip_buy_bg"
+                        app:checkedIconTint="@color/buy_green"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_sell"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SELL"
+                        android:tag="SELL"
+                        android:checked="true"
+                        app:chipBackgroundColor="@color/chip_sell_bg"
+                        app:checkedIconTint="@color/sell_red"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_neu"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NEU"
+                        android:tag="NEU"
+                        android:checked="true"
+                        app:chipBackgroundColor="@color/chip_neu_bg"
+                        app:checkedIconTint="@color/neu_yellow"/>
+                </com.google.android.material.chip.ChipGroup>
+                <!-- Profile filter chips -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:singleLine="false">
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TECH"      android:tag="TECH"      android:checked="true"/>
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COMMODITY" android:tag="COMMODITY" android:checked="true"/>
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DEFENSIVE" android:tag="DEFENSIVE" android:checked="true"/>
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FOREX"     android:tag="FOREX_IDX" android:checked="true"/>
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CRYPTO"    android:tag="CRYPTO"    android:checked="true"/>
+                </com.google.android.material.chip.ChipGroup>
+                <!-- Shimmer loading placeholder -->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <include layout="@layout/item_shimmer_card"/>
+                        <include layout="@layout/item_shimmer_card"/>
+                        <include layout="@layout/item_shimmer_card"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+                <!-- Empty state -->
+                <TextView
+                    android:id="@+id/tv_empty_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No assets match the current filters."
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:visibility="gone"/>
+                <!-- Signal cards list -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_signals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:clipToPadding="false"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

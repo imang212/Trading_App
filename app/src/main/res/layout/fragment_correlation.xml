@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark"
+    android:padding="12dp"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/correlation_matrix"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pearson correlation of daily returns"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_diversification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_select_assets"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Select Assets (max 10)"
+        android:textSize="12sp"
+        android:textColor="@color/text_primary"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="@color/accent_blue"
+        app:backgroundTint="@color/bg_card2"
+        android:layout_marginBottom="12dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.trading.trading_app.ui.correlation.CorrelationGridView
+            android:id="@+id/correlation_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <!-- Legend -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#C0392B"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" -1" android:textColor="@color/text_secondary" android:textSize="11sp" android:layout_marginStart="4dp"/>
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#FFFFFF" android:layout_marginStart="12dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" 0" android:textColor="@color/text_secondary" android:textSize="11sp" android:layout_marginStart="4dp"/>
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#145A32" android:layout_marginStart="12dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" +1" android:textColor="@color/text_secondary" android:textSize="11sp" android:layout_marginStart="4dp"/>
+    </LinearLayout>
+</LinearLayout>
