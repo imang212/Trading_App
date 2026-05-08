@@ -1,4 +1,3 @@
-<div align="center">
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android%2011%2B-3DDC84?style=flat&logo=android&logoColor=white" />
   <img src="https://img.shields.io/badge/Language-Java-ED8B00?style=flat&logo=openjdk&logoColor=white" />
@@ -10,7 +9,7 @@
 **A powerful Android trading analysis tool powered by Bayesian scoring**
 
  • [Screenshots](#screenshots) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing)
-</div>
+
 
 ## Overview
 **Trading App** is a native Android application designed for traders who want to move beyond simple technical analysis. It utilizes **Bayesian Scoring** to aggregate signals from multiple indicators, providing a probabilistic outlook on market movements. 
