@@ -16,7 +16,10 @@ import com.trading.trading_app.model.BacktestResult;
 import com.trading.trading_app.repository.TradingRepository;
 import com.trading.trading_app.viewmodel.SignalViewModel;
 import java.text.NumberFormat; import java.text.SimpleDateFormat;
-import java.util.ArrayList; import java.util.Date; import java.util.List; import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date; import java.util.List; import java.util.Locale;
+import java.util.TimeZone;
 /**Backtest Summary screen. Runs an on-device backtest for the currently selected asset and shows:
  *  - Return, B&H return, Alpha, Win rate, Sharpe, Max DD
  *  - Equity curve (MPAndroidChart LineChart)*/
@@ -65,16 +68,20 @@ public class BacktestFragment extends Fragment {
             binding.tvBacktestDate.setTextColor(requireContext().getColor(R.color.accent_blue));
         }
         binding.btnBacktestPickDate.setOnClickListener(v -> {
-            long init = vm.getStartDate() > 0 ? vm.getStartDate() : MaterialDatePicker.todayInUtcMilliseconds() - 5L * 365 * 24 * 3600 * 1000;
-            MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker().setTheme(R.style.TradingApp_DatePicker).setTitleText("Backtest Start Date").setSelection(init).build();
-            picker.addOnPositiveButtonClickListener(epochMs -> {
-                vm.setStartDate(epochMs);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                binding.tvBacktestDate.setText(sdf.format(new Date(epochMs)));
-                binding.tvBacktestDate.setTextColor(requireContext().getColor(R.color.accent_blue));
-            });
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            cal.clear(); // Vyčistí hodiny, minuty atd.
+            cal.set(2018, Calendar.JANUARY, 1); // Pozor: měsíce jsou v Calendar od 0 (listopad je NOVEMBER)
+            long defaultDate = cal.getTimeInMillis(); // Použití v Builderu
+            MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker().setTheme(R.style.TradingApp_DatePicker).setTitleText("Backtest Start Date").setSelection(defaultDate) .build();
+            picker.addOnPositiveButtonClickListener(epochMs -> { vm.setStartDate(epochMs); updateDateDisplay(epochMs); });
             picker.show(getParentFragmentManager(), "BT_DATE_PICKER");
         });
+    }
+    private void updateDateDisplay(long epochMs) {
+        if (epochMs <= 0) return;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        binding.tvBacktestDate.setText(sdf.format(new Date(epochMs)));
+        binding.tvBacktestDate.setTextColor(requireContext().getColor(R.color.accent_blue));
     }
     private void setupRunButton() {
         binding.btnRunBacktest.setOnClickListener(v -> {

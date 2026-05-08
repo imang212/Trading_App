@@ -140,7 +140,7 @@
                             android:id="@+id/tv_selected_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No date selected (using 5-year default)"
+                            android:text="No date selected (using 1.1.2018 default)"
                             android:textColor="@color/text_hint"
                             android:textSize="11sp"
                             android:layout_marginBottom="8dp"/>

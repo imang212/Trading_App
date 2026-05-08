@@ -19,7 +19,8 @@ import com.trading.trading_app.model.Asset;
 import com.trading.trading_app.model.AppConfig;
 import com.trading.trading_app.ui.detail.AssetDetailFragment;
 import com.trading.trading_app.viewmodel.SignalViewModel;
-import java.text.SimpleDateFormat; import java.util.Arrays; import java.util.Date; import java.util.HashSet; import java.util.Locale; import java.util.Set;
+import java.text.SimpleDateFormat; import java.util.Arrays;
+import java.util.Calendar; import java.util.Date; import java.util.HashSet; import java.util.Locale; import java.util.Set; import java.util.TimeZone;
 /**Main screen: signal cards + filter chips + interval spinner. Mirrors the "Signal Overview" page of the Streamlit dashboard.*/
 public class SignalOverviewFragment extends Fragment {
     private FragmentSignalOverviewBinding binding; private SignalViewModel vm; private SignalAdapter adapter;
@@ -50,7 +51,9 @@ public class SignalOverviewFragment extends Fragment {
         });
         binding.etInitialCapital.setText(String.valueOf((int) vm.getCapital())); // Pre-fill with current ViewModel value
         binding.btnPickDate.setOnClickListener(v -> { // Backtest start date picker
-            MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker().setTheme(R.style.TradingApp_DatePicker).setTitleText("Select Backtest Start Date").setSelection(vm.getStartDate() > 0 ? vm.getStartDate() : MaterialDatePicker.todayInUtcMilliseconds() - 5L * 365 * 24 * 3600 * 1000).build();
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC")); cal.set(2018, Calendar.JANUARY, 1);
+            long selection = vm.getStartDate() > 0 ? vm.getStartDate() : cal.getTimeInMillis();
+            MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker().setTheme(R.style.TradingApp_DatePicker).setTitleText("Select Backtest Start Date").setSelection(selection).build();
             picker.addOnPositiveButtonClickListener(epochMs -> {
                 vm.setStartDate(epochMs);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());

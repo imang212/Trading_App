@@ -119,21 +119,6 @@
                         tools:textColor="@color/buy_green" />
                 </LinearLayout>
             </LinearLayout>
-            <!-- Score bar (5 segments) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <View android:id="@+id/seg0" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
-                <View android:id="@+id/seg1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
-                <View android:id="@+id/seg2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
-                <View android:id="@+id/seg3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="2dp" android:background="#3A3A3A" />
-                <View android:id="@+id/seg4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="#3A3A3A" />
-
-            </LinearLayout>
 
             <!-- Condition ticks row -->
             <LinearLayout

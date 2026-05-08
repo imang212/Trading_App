@@ -53,8 +53,7 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
             // Bayes score next to signal — show the relevant probability in ()
             String bayesText = asset.bayesScoreBadge();
             b.tvBayesScore.setText("(" + bayesText + ")"); b.tvBayesScore.setTextColor(Color.parseColor(signalHex(asset.signal))); b.tvBayesScore.setAlpha(0.75f);
-            // Score bar (5 segments)
-            setupScoreBar(asset.buyScore, asset.signal);
+            //setupScoreBar(asset.buyScore, asset.signal); // Score bar (5 segments)
             // Key indicators row
             b.tvRsi.setText(String.format("RSI %.0f", asset.rsi));
             b.tvBbPct.setText(String.format("BB%% %.2f", asset.bbPct));
@@ -73,27 +72,13 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
             b.getRoot().setOnClickListener(v -> listener.onClick(asset));
         }
         private void bindCond(android.widget.TextView tv, boolean cond, String label) { tv.setText(cond ? "✔ " + label : "✕ " + label); }
-        private void setupScoreBar(int score, String signal) {
-            View[] segs = {b.seg0, b.seg1, b.seg2, b.seg3, b.seg4};
-            int fillColor;
-            if ("SELL".equals(signal)) {
-                fillColor = score <= 1 ? Color.parseColor("#E74C3C") : score == 2 ? Color.parseColor("#F39C12") : Color.parseColor("#2ECC71");
-            }
-            else {
-                fillColor = score >= 4 ? Color.parseColor("#2ECC71") : score == 3 ? Color.parseColor("#F39C12") : Color.parseColor("#E74C3C");
-            }
-            for (int i = 0; i < segs.length; i++) segs[i].setBackgroundColor(i < score ? fillColor : Color.parseColor("#3A3A3A"));
-        }
         private static String signalHex(String s) { if ("BUY".equals(s))  return "#2ECC71"; if ("SELL".equals(s)) return "#E74C3C"; return "#F39C12"; }
     }
     // DiffUtil
     private static final DiffUtil.ItemCallback<Asset> DIFF_CALLBACK = new DiffUtil.ItemCallback<Asset>() {
             @Override public boolean areItemsTheSame(@NonNull Asset a, @NonNull Asset b) { return a.name.equals(b.name); }
             @Override public boolean areContentsTheSame(@NonNull Asset a, @NonNull Asset b) {
-                return a.signal.equals(b.signal)
-                        && Double.compare(a.price, b.price) == 0
-                        && a.buyScore == b.buyScore
-                        && a.bayesBuyScore == b.bayesBuyScore;
+                return a.signal.equals(b.signal) && Double.compare(a.price, b.price) == 0 && a.buyScore == b.buyScore && a.bayesBuyScore == b.bayesBuyScore;
             }
         };
 

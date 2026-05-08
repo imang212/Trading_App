@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="10dp"
-                        android:text="5-year default"
+                        android:text="1.1.2018 default"
                         android:textColor="@color/text_hint"
                         android:textSize="12sp"
                         android:gravity="start"/>

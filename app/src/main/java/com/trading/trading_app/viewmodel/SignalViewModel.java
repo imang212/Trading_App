@@ -12,7 +12,7 @@ public class SignalViewModel extends AndroidViewModel {
     // Filters (mutable state held in ViewModel)
     private final MutableLiveData<String> intervalLd = new MutableLiveData<>("1d");
     private final MutableLiveData<Double> capitalLd = new MutableLiveData<>(10_000.0);
-    private final MutableLiveData<Long> startDateLd = new MutableLiveData<>(0L);  // 0 = use default 5yr
+    private final MutableLiveData<Long> startDateLd = new MutableLiveData<>(1514764800000L);  // 0 = use default 5yr
     private final MutableLiveData<Boolean> convertCurrencyLd = new MutableLiveData<>(true);
     private final MutableLiveData<Set<String>> sigFilterLd = new MutableLiveData<>(), profFilterLd = new MutableLiveData<>();
     private final MediatorLiveData<List<Asset>> filteredSignals = new MediatorLiveData<>(); // Filtered output

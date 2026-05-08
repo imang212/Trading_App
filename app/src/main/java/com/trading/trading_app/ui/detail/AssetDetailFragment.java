@@ -238,19 +238,19 @@ public class AssetDetailFragment extends Fragment {
     }
     // Context strings (mirrors Python badges)
     private String bbContext(double pct) {
-        if (pct < 0.2) return "🟢 Near lower band – good buy zone";
-        if (pct < 0.4) return "🟡 Below mid – slightly undervalued";
-        if (pct < 0.6) return "⚪ Mid band – neutral";
-        if (pct < 0.8) return "🟠 Above mid – slightly overvalued";
-        return "🔴 Near upper band – sell zone";
+        if (pct < 0.2) return String.format(Locale.US, "BB: 🟢 Near lower band – good buy zone", pct);
+        if (pct < 0.4) return String.format(Locale.US,"BB: 🟡 Below mid – slightly undervalued", pct);
+        if (pct < 0.6) return String.format(Locale.US,"BB: ⚪ Mid band – neutral", pct);
+        if (pct < 0.8) return String.format(Locale.US,"BB: 🟠 Above mid – slightly overvalued", pct);
+        return String.format(Locale.US,"BB: 🔴 Near upper band – sell zone", pct);
     }
     private String rsiContext(double rsi, double mid, int os, int ob) {
-        if (rsi < os) return String.format(Locale.US, "🟢 Oversold (%.0f) – bounce possible", rsi);
-        if (rsi > ob) return String.format(Locale.US, "🔴 Overbought (%.0f) – reversal possible", rsi);
-        if (rsi < mid) return String.format(Locale.US, "🟡 (%.0f) below mid – room to grow", rsi);
-        return String.format(Locale.US, "🟠 (%.0f) above mid – weakening", rsi);
+        if (rsi < os) return String.format(Locale.US, "RSI: 🟢 Oversold (%.0f) – bounce possible", rsi);
+        if (rsi > ob) return String.format(Locale.US, "RSI: 🔴 Overbought (%.0f) – reversal possible", rsi);
+        if (rsi < mid) return String.format(Locale.US, "RSI: 🟡 (%.0f) below mid – room to grow", rsi);
+        return String.format(Locale.US, "RSI: 🟠 (%.0f) above mid – weakening", rsi);
     }
-    private String macdContext(double hist) { return String.format(Locale.US, "%s  hist=%.3f", hist >= 0 ? "🟢 Strengthening ▲" : "🔴 Weakening ▼", hist); }
+    private String macdContext(double hist) { return String.format(Locale.US, "%s  hist=%.3f", hist >= 0 ? "MACD: 🟢 Strengthening ▲" : "MACD: 🔴 Weakening ▼", hist); }
     private static String signalHex(String s) { if ("BUY".equals(s))  return "#2ECC71"; if ("SELL".equals(s)) return "#E74C3C"; return "#F39C12"; }
     @Override public void onDestroyView() { super.onDestroyView(); binding = null; }
 }
