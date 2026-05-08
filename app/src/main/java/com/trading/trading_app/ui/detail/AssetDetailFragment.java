@@ -67,7 +67,7 @@ public class AssetDetailFragment extends Fragment {
         binding.tvDetailChange.setTextColor(asset.priceChange >= 0 ? Color.parseColor("#2ECC71") : Color.parseColor("#E74C3C"));
         binding.tvDetailSignal.setText(asset.signal);
         binding.tvDetailSignal.setTextColor(Color.parseColor(signalHex(asset.signal)));
-        binding.tvDetailScore.setText(String.format(Locale.US, "Score %d/5  |  BUY %d%%  SELL %d%%", asset.buyScore, asset.bayesBuyScore, asset.bayesSellScore));
+        binding.tvDetailScore.setText(String.format(Locale.US, "Score %d/5 | BUY %.2f/%.2f SELL %.2f/%.2f", asset.buyScore, asset.bayesBuyScore, asset.bayesThresholdBuy, asset.bayesSellScore, asset.bayesThresholdSell));
         binding.tvDetailAtr.setText(String.format("ATR %s%.2f  (%.1f%%)", asset.currencySymbol, asset.atr, asset.atr / asset.price * 100));
         // BB / RSI / MACD context badges
         binding.tvBbContext.setText(bbContext(asset.bbPct));

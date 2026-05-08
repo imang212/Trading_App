@@ -1,6 +1,6 @@
 package com.trading.trading_app.model;
 
-import java.io.Serializable; import java.util.List;
+import java.io.Serializable; import java.util.List; import java.util.Map;
 /** Core data model for a tradable asset. Mirrors the signal dict produced by the Streamlit dashboard's load_signals().*/
 public class Asset implements Serializable {
     // Identity
@@ -12,9 +12,10 @@ public class Asset implements Serializable {
     // Signal
     public String signal; // "BUY" | "SELL" | "NEU"
     public int buyScore, sellScore;
-    public int bayesBuyScore, bayesSellScore; // raw, weighted 0-5
-    public int bayesNeuScore;   // 0-100 neutral probability
+    public double bayesBuyScore, bayesSellScore; // raw, weighted 0-5
     public double bayesBuyProb, bayesSellProb; // raw 0.0-1.0
+    public double bayesThresholdBuy, bayesThresholdSell;
+    public Map<String, Double> bayesHitRates; // // P(outcome|fires) per indicator — for detail screen tooltip
 
     // Indicator conditions (true = bullish)
     public boolean condMA, condRSI, condBB, condMACD, condATR;
@@ -41,6 +42,11 @@ public class Asset implements Serializable {
     }
     /** Risk-reward ratio to a given target from buy limit.*/
     public double rrTo(double target) { double riskPer = buyLimit - stopLoss; return riskPer > 0 ? Math.abs((target - buyLimit) / riskPer) : 0; }
+    public String bayesScoreBadge() {
+        if (isBuy()) { return String.format(java.util.Locale.US, "%.2f / %.2f", bayesBuyScore, bayesThresholdBuy); }
+        else if (isSell()) { return String.format(java.util.Locale.US, "%.2f / %.2f", bayesSellScore, bayesThresholdSell); }
+        else { return String.format(java.util.Locale.US, "%.2f", Math.max(bayesBuyScore, bayesSellScore)); } // NEU: show the higher of the two to indicate "distance from signal"
+    }
     /** One OHLCV bar used for charting.*/
     public static class OhlcBar implements Serializable {
         public long timestamp; // epoch ms

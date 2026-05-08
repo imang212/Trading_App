@@ -73,24 +73,35 @@
                             tools:text="COMMODITY" />
                     </LinearLayout>
                 </LinearLayout>
-
                 <!-- Signal + price -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="end">
-
-                    <TextView
-                        android:id="@+id/tv_signal"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="2dp"
-                        tools:text="BUY"
-                        tools:textColor="@color/buy_green" />
-
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="2dp">
+                        <TextView
+                            android:id="@+id/tv_signal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="BUY"
+                            tools:textColor="@color/buy_green" />
+                        <TextView
+                            android:id="@+id/tv_bayes_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            tools:text="(72%)" />
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/tv_price"
                         android:layout_width="wrap_content"
@@ -99,7 +110,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="$2,034.50" />
-
                     <TextView
                         android:id="@+id/tv_change"
                         android:layout_width="wrap_content"
@@ -107,10 +117,8 @@
                         android:textSize="12sp"
                         tools:text="+0.45%"
                         tools:textColor="@color/buy_green" />
-
                 </LinearLayout>
             </LinearLayout>
-
             <!-- Score bar (5 segments) -->
             <LinearLayout
                 android:layout_width="match_parent"

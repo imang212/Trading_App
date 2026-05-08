@@ -112,8 +112,24 @@ public class SignalOverviewFragment extends Fragment {
         binding.recyclerSignals.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerSignals.setAdapter(adapter);
         binding.recyclerSignals.setHasFixedSize(false);
-        // Improve scroll performance
-        binding.recyclerSignals.setItemViewCacheSize(20);
+        binding.recyclerSignals.setItemViewCacheSize(10); // Improve scroll performance
+        setupSortButton();
+    }
+    private void setupSortButton() {
+        binding.btnSortBayes.setOnClickListener(v -> {
+            SignalAdapter.SortOrder next; // Cyklus: DEFAULT → BAYES_DESC → BAYES_ASC → DEFAULT
+            switch (adapter.getSortOrder()) {
+                case DEFAULT: next = SignalAdapter.SortOrder.BAYES_DESC; break;
+                case BAYES_DESC: next = SignalAdapter.SortOrder.BAYES_ASC; break;
+                default: next = SignalAdapter.SortOrder.DEFAULT; break;
+            }
+            adapter.setSortOrder(next);
+            switch (next) {
+                case BAYES_DESC: binding.btnSortBayes.setText("Bayes ↓"); break;
+                case BAYES_ASC: binding.btnSortBayes.setText("Bayes ↑"); break;
+                default: binding.btnSortBayes.setText("Výchozí ↕"); break;
+            }
+        });
     }
     // Summary cards (BUY / SELL counts)
     private void setupSummaryCards() {
@@ -148,14 +164,13 @@ public class SignalOverviewFragment extends Fragment {
     // Observe ViewModel
     private void observeViewModel() {
         vm.getFilteredSignals().observe(getViewLifecycleOwner(), signals -> {
-            adapter.submitList(signals);
+            adapter.submitSortedList(signals);
             binding.tvEmptyState.setVisibility(signals == null || signals.isEmpty() ? View.VISIBLE : View.GONE);
         });
         vm.isLoading().observe(getViewLifecycleOwner(), loading -> {
             binding.swipeRefresh.setRefreshing(loading);
             binding.shimmerLayout.setVisibility(loading && (adapter.getItemCount() == 0) ? View.VISIBLE : View.GONE);
-            if (loading) binding.shimmerLayout.startShimmer();
-            else binding.shimmerLayout.stopShimmer();
+            if (loading) binding.shimmerLayout.startShimmer(); else binding.shimmerLayout.stopShimmer();
         });
         vm.getError().observe(getViewLifecycleOwner(), error -> {
             if (error != null) { binding.tvError.setVisibility(View.VISIBLE); binding.tvError.setText("⚠ " + error); }
