@@ -2,12 +2,11 @@
 
 # Trading App
 **A powerful Android trading analysis tool powered by Bayesian scoring**
+
 [![Platform](https://img.shields.io/badge/platform-Android%2011%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
 [![Language](https://img.shields.io/badge/language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com)
-[![Stars](https://img.shields.io/github/stars/imang212/Trading_App?style=for-the-badge&color=yellow&logo=github)](https://github.com/imang212/Trading_App/stargazers)
-[![Forks](https://img.shields.io/github/forks/imang212/Trading_App?style=for-the-badge&color=blue&logo=github)](https://github.com/imang212/Trading_App/network/members)
-[![License](https://img.shields.io/github/license/imang212/Trading_App?style=for-the-badge)](LICENSE)
-[Features](#features) • [Screenshots](#screenshots) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing)
+
+ • [Screenshots](#screenshots) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing)
 </div>
 
 ## Overview
@@ -23,6 +22,8 @@ Trading App is a native Android application that helps traders analyze assets us
 - **Asset Correlation Matrix** — Visualize correlations between selected assets to manage portfolio risk
 
 ## Screenshots
+<img width="50%" height="50%" alt="Screenshot_20260508_164342" src="https://github.com/user-attachments/assets/ea359e49-8c36-45e2-86a1-a336a5b4dcd3" />
+
 
 
 ## Getting Started
