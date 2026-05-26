@@ -1,17 +1,20 @@
-<div align="center">
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android%2011%2B-3DDC84?style=flat&logo=android&logoColor=white" />
+  <img src="https://img.shields.io/badge/Language-Java-ED8B00?style=flat&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-BSD%202--Clause-blue?style=flat" />
+  <img src="https://img.shields.io/badge/Math-Bayesian%20Inference-orange?style=flat" />
+</p>
 
 # Trading App
 **A powerful Android trading analysis tool powered by Bayesian scoring**
-[![Platform](https://img.shields.io/badge/platform-Android%2011%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
-[![Language](https://img.shields.io/badge/language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com)
-[![Stars](https://img.shields.io/github/stars/imang212/Trading_App?style=for-the-badge&color=yellow&logo=github)](https://github.com/imang212/Trading_App/stargazers)
-[![Forks](https://img.shields.io/github/forks/imang212/Trading_App?style=for-the-badge&color=blue&logo=github)](https://github.com/imang212/Trading_App/network/members)
-[![License](https://img.shields.io/github/license/imang212/Trading_App?style=for-the-badge)](LICENSE)
-[Features](#features) • [Screenshots](#screenshots) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing)
-</div>
+
+ • [Screenshots](#screenshots) • [Getting Started](#getting-started) • [Usage](#usage) • [Contributing](#contributing)
+
 
 ## Overview
-Trading App is a native Android application that helps traders analyze assets using a **Bayesian scoring system** built on top of multiple technical indicators. Whether you're backtesting strategies or exploring asset correlations, this app gives you a full analytical toolkit right on your phone.
+**Trading App** is a native Android application designed for traders who want to move beyond simple technical analysis. It utilizes **Bayesian Scoring** to aggregate signals from multiple indicators, providing a probabilistic outlook on market movements. 
+
+The app allows for deep **backtesting**, **correlation analysis**, and precise **order level** calculations, all within a customizable environment.
 
 ## Features
 - **Bayesian Signal Scoring** — Aggregates signals from multiple technical indicators into a single probabilistic score per asset
@@ -23,7 +26,13 @@ Trading App is a native Android application that helps traders analyze assets us
 - **Asset Correlation Matrix** — Visualize correlations between selected assets to manage portfolio risk
 
 ## Screenshots
+<p align="center">
+  <img width="250" alt="Trading App UI" src="https://github.com/user-attachments/assets/ea359e49-8c36-45e2-86a1-a336a5b4dcd3" />
+</p>
 
+<p align="center">
+<img width="250" alt="Tarading_App_Backtest" src="https://github.com/user-attachments/assets/3cf099cc-2d64-4951-be6d-1412ef213013" />
+</p>
 
 ## Getting Started
 ### Prerequisites
@@ -43,11 +52,10 @@ Trading App is a native Android application that helps traders analyze assets us
 ## Usage
 1. **Select an asset** to analyze
 2. **Set your starting capital** and **start date**
-3. Configure your preferred **technical indicators** and their parameters
-4. View the **Bayes Score** and generated trading signals
-5. Run a **backtest** to evaluate historical performance
-6. Check the **Order Levels table** for actionable price levels
-7. Use the **Correlation Matrix** to compare multiple assets
+3. View the **Bayes Score** and generated trading signals
+4. Run a **backtest** to evaluate historical performance
+5. Check the **Order Levels table** for actionable price levels
+6. Use the **Correlation Matrix** to compare multiple assets
 
 ## Contributing
 Contributions, issues and feature requests are welcome!  
@@ -58,9 +66,5 @@ Feel free to check the [issues page](https://github.com/imang212/Trading_App/iss
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Show your support
-If this project helped you, please consider giving it a **star** ⭐ — it means a lot and helps others discover the project!
-
-<div align="center">
-Made with ❤️ for traders
-</div>
+## License
+This project is licensed under the BSD 2-Clause "Simplified" License. See the LICENSE file for details.
