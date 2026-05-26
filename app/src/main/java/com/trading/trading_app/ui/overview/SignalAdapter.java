@@ -2,8 +2,7 @@ package com.trading.trading_app.ui.overview;
 
 import android.graphics.Color;
 import android.view.LayoutInflater; import android.view.View; import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil; import androidx.recyclerview.widget.ListAdapter; import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull; import androidx.recyclerview.widget.DiffUtil; import androidx.recyclerview.widget.ListAdapter; import androidx.recyclerview.widget.RecyclerView;
 import com.trading.app.databinding.ItemSignalCardBinding;
 import com.trading.trading_app.model.Asset;
 import java.util.ArrayList; import java.util.Collections; import java.util.List; import java.util.Locale;
@@ -24,12 +23,12 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
     public SortOrder getSortOrder() { return sortOrder; }
     private void applySort() {
         List<Asset> sorted = new ArrayList<>(originalList);
-        if (sortOrder == SortOrder.BAYES_DESC) { Collections.sort(sorted, (a, b) -> Double.compare(bestScore(b), bestScore(a))); } // Best Bayes score first — for BUY signals use buyProb, SELL use sellProb
+        if (sortOrder == SortOrder.BAYES_DESC) { Collections.sort(sorted, (a, b) -> Double.compare(bestScore(b), bestScore(a))); }
         else if (sortOrder == SortOrder.BAYES_ASC) { Collections.sort(sorted, (a, b) -> Double.compare(bestScore(a), bestScore(b))); }
         submitList(sorted);
     }
-    /** Returns the relevant Bayes probability for sorting: BUY assets → buyProb, SELL → sellProb, NEU → 0.5 */
-    private double bestScore(Asset a) { if ("BUY".equals(a.signal)) return a.bayesBuyProb; if ("SELL".equals(a.signal)) return a.bayesSellProb; return 0.5; }
+    /** Unified 0–10 score used for sorting. 10 = strongest BUY, 0 = strongest SELL, 5 = neutral. All assets are comparable on the same scale regardless of signal type.*/
+    private double bestScore(Asset a) { return a.bayesBuyScore; }
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemSignalCardBinding b = ItemSignalCardBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
@@ -51,9 +50,11 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
             b.tvSignal.setText(asset.signal); b.tvSignal.setTextColor(Color.parseColor(signalHex(asset.signal)));
             b.viewSignalBar.setBackgroundColor(asset.signalColor());
             // Bayes score next to signal — show the relevant probability in ()
-            String bayesText = asset.bayesScoreBadge();
-            b.tvBayesScore.setText("(" + bayesText + ")"); b.tvBayesScore.setTextColor(Color.parseColor(signalHex(asset.signal))); b.tvBayesScore.setAlpha(0.75f);
-            //setupScoreBar(asset.buyScore, asset.signal); // Score bar (5 segments)
+            String bayesText = String.format(java.util.Locale.US,"B:%.2f/%.2f", asset.bayesBuyScore, asset.bayesThresholdBuy);
+            b.tvBayesScore.setText("(" + bayesText + ")");
+            b.tvBayesScore.setTextColor(asset.bayesBuyScore >= asset.bayesThresholdBuy ? android.graphics.Color.parseColor("#2ECC71") : android.graphics.Color.parseColor("#9BA8BE"));
+            b.tvBayesScore.setAlpha(0.85f);
+            // setupScoreBar(asset.buyScore, asset.signal); // Score bar (5 segments)
             // Key indicators row
             b.tvRsi.setText(String.format("RSI %.0f", asset.rsi));
             b.tvBbPct.setText(String.format("BB%% %.2f", asset.bbPct));
@@ -78,7 +79,7 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
     private static final DiffUtil.ItemCallback<Asset> DIFF_CALLBACK = new DiffUtil.ItemCallback<Asset>() {
             @Override public boolean areItemsTheSame(@NonNull Asset a, @NonNull Asset b) { return a.name.equals(b.name); }
             @Override public boolean areContentsTheSame(@NonNull Asset a, @NonNull Asset b) {
-                return a.signal.equals(b.signal) && Double.compare(a.price, b.price) == 0 && a.buyScore == b.buyScore && a.bayesBuyScore == b.bayesBuyScore;
+                return a.signal.equals(b.signal) && Double.compare(a.price, b.price) == 0 && a.buyScore == b.buyScore && Double.compare(a.bayesBuyScore, b.bayesBuyScore) == 0;
             }
         };
 
