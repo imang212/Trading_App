@@ -35,6 +35,8 @@
     <color name="colorSurface">#1A1D2E</color>
     <color name="colorOnSurface">#F0F2FF</color>
     <color name="colorBackground">#0F111A</color>
+    <!-- Launcher icon background -->
+    <color name="ic_launcher_background">#0D1117</color>
     <!-- Bottom nav -->
     <color name="bottom_nav_selected">#4DA8E8</color>
     <color name="bottom_nav_unselected">#5A6478</color>
