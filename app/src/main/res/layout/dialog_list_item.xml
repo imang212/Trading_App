@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Custom single-select list item for plain .setItems()-style dialogs
+    (asset picker, alert type picker, alert action picker).
+    Replaces the system layout so text color matches the rest of the app
+    regardless of Android version / system theme.
+-->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="16dp"
+    android:textColor="#F0F2FF"
+    android:textSize="15sp"
+    android:background="?android:attr/selectableItemBackground"/>

@@ -18,10 +18,10 @@
         <item name="android:popupMenuStyle">@style/Widget.TradingApp.PopupMenu</item>
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Filter</item>
     </style>
-    <!-- Settings activity gets a lighter theme so PreferenceFragment text is readable -->
     <style name="Theme.TradingApp.Settings" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/accent_blue</item>
         <item name="colorPrimaryDark">@color/bg_card</item>
+        <item name="colorAccent">@color/accent_blue</item>
         <item name="android:colorBackground">@color/bg_card</item>
         <item name="android:windowBackground">@color/bg_card</item>
         <item name="android:statusBarColor">@color/bg_card</item>
@@ -29,9 +29,24 @@
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColor">@color/text_primary</item>
+        <!-- ListPreference click opens a dialog with single-choice items (interval, refresh
+             period) — without this it renders dark text on dark background, same root
+             cause as the asset-selection dialogs we fixed earlier. -->
+        <item name="android:textColorAlertDialogListItem">@color/text_primary</item>
+        <!-- EditTextPreference ("Capital per Asset") opens a dialog with an EditText —
+             without this the typed text defaults to black and is invisible on bg_card. -->
+        <item name="android:editTextColor">@color/text_primary</item>
+        <item name="android:editTextStyle">@style/Widget.TradingApp.Settings.EditText</item>
         <item name="preferenceTheme">@style/PreferenceTheme.TradingApp</item>
         <item name="android:spinnerStyle">@style/Widget.TradingApp.Spinner</item>
         <item name="android:dropDownListViewStyle">@style/Widget.TradingApp.DropDownListView</item>
+    </style>
+    <!-- EditText inside EditTextPreference dialog — explicit colors, no system fallback -->
+    <style name="Widget.TradingApp.Settings.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="colorControlNormal">@color/text_secondary</item>
+        <item name="colorControlActivated">@color/accent_blue</item>
     </style>
     <!-- PreferenceFragment theming -->
     <style name="PreferenceTheme.TradingApp" parent="PreferenceThemeOverlay.v14.Material">

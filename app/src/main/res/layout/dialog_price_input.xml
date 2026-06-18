@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    android:hint="Price threshold"
+    app:boxStrokeColor="@color/accent_blue"
+    app:hintTextColor="@color/text_secondary">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_price_threshold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"/>
+
+</com.google.android.material.textfield.TextInputLayout>

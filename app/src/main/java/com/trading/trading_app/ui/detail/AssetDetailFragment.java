@@ -75,6 +75,7 @@ public class AssetDetailFragment extends Fragment {
     private void populateUi(Asset asset) {
         binding.progressDetail.setVisibility(View.GONE);
         binding.scrollContent.setVisibility(View.VISIBLE);
+        binding.tvDetailAssetName.setText(asset.name);
         // Header
         binding.tvDetailPrice.setText(String.format("%s%,.2f", asset.currencySymbol, asset.price));
         String chg = String.format("%+.2f%%", asset.priceChange);
@@ -116,6 +117,7 @@ public class AssetDetailFragment extends Fragment {
         currentAsset = asset;
         setupPredictionTabs(asset);
         runPrediction(asset);
+        setupAlertBell(asset);
     }
     // Candlestick + Volume + EMA + BB
     private void setupCandleChart(Asset asset) {
@@ -524,6 +526,35 @@ public class AssetDetailFragment extends Fragment {
         }
     }
     private static int adjustAlpha(int color, int alpha) { return (color & 0x00FFFFFF) | (alpha << 24); }
+    // Quick alert creation
+    private void setupAlertBell(Asset asset) {
+        if (binding == null) return;
+        binding.btnSetAlert.setOnClickListener(v -> {
+            String[] options = {
+                    "Notify me on BUY opportunity",
+                    "Notify me on SELL reversal",
+                    "⬆ Notify when price rises above " + String.format(Locale.US, "%.2f", asset.price * 1.05),
+                    "⬇ Notify when price falls below " + String.format(Locale.US, "%.2f", asset.price * 0.95)
+            };
+            android.widget.ArrayAdapter<String> optAdapter = new android.widget.ArrayAdapter<>(requireContext(), com.trading.app.R.layout.dialog_list_item, options);
+            new com.google.android.material.dialog.MaterialAlertDialogBuilder(
+                    requireContext(), com.trading.app.R.style.Widget_TradingApp_Dialog)
+                    .setTitle("Set Alert — " + asset.name)
+                    .setAdapter(optAdapter, (d, which) -> {
+                        com.trading.trading_app.model.AlertRule rule;
+                        switch (which) {
+                            case 0: rule = com.trading.trading_app.model.AlertRule.buyOpportunity(asset.name, asset.ticker, asset.profile); break;
+                            case 1: rule = com.trading.trading_app.model.AlertRule.sellReversal(asset.name, asset.ticker, asset.profile); break;
+                            case 2: rule = com.trading.trading_app.model.AlertRule.priceAbove(asset.name, asset.ticker, asset.price * 1.05); break;
+                            default: rule = com.trading.trading_app.model.AlertRule.priceBelow(asset.name, asset.ticker, asset.price * 0.95); break;
+                        }
+                        com.trading.trading_app.model.AlertStore.getInstance(requireContext()).add(rule);
+                        android.widget.Toast.makeText(getContext(),
+                                "Alert saved ✓  Check the Alerts tab", android.widget.Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
+        });
+    }
     @Override
     public void onDestroyView() { super.onDestroyView(); predExecutor.shutdownNow(); binding = null; }
 }

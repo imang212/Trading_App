@@ -5,7 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel; import androidx.lifecycle.LiveData; import androidx.lifecycle.MediatorLiveData; import androidx.lifecycle.MutableLiveData;
 import com.trading.trading_app.model.Asset;
 import com.trading.trading_app.repository.TradingRepository;
-import java.util.ArrayList; import java.util.List; import java.util.Set;
+import java.util.ArrayList; import java.util.Collections; import java.util.List; import java.util.Set;
+import com.trading.trading_app.ui.overview.SignalAdapter;
 /**ViewModel for Signal Overview screen. Survives configuration changes; exposes filtered LiveData to the Fragment. Keeps live data on UI fragments*/
 public class SignalViewModel extends AndroidViewModel {
     private final TradingRepository repo;
@@ -17,6 +18,7 @@ public class SignalViewModel extends AndroidViewModel {
     private final MutableLiveData<Set<String>> sigFilterLd = new MutableLiveData<>(), profFilterLd = new MutableLiveData<>();
     private final MediatorLiveData<List<Asset>> filteredSignals = new MediatorLiveData<>(); // Filtered output
     private List<Asset> allSignals = new ArrayList<>();
+    private SignalAdapter.SortOrder sortOrder = SignalAdapter.SortOrder.DEFAULT;
     public SignalViewModel(@NonNull Application application) {
         super(application);
         repo = TradingRepository.getInstance(application); // Re-apply filter whenever raw signals change
@@ -42,18 +44,19 @@ public class SignalViewModel extends AndroidViewModel {
     public void setConvertCurrency(boolean convert) { convertCurrencyLd.setValue(convert); repo.setConvertCurrency(convert); repo.clearCache(); reload(); }
     public void setSignalFilter(Set<String> signals) { sigFilterLd.setValue(signals); applyFilter(); }
     public void setProfileFilter(Set<String> profiles) { profFilterLd.setValue(profiles); applyFilter(); }
+    public SignalAdapter.SortOrder getSortOrder() { return sortOrder; }
+    public void setSortOrder(SignalAdapter.SortOrder order) { sortOrder = order; applyFilter(); }
     public String getInterval() { return intervalLd.getValue() != null ? intervalLd.getValue() : "1d"; }
     public double getCapital() { return capitalLd.getValue() != null ? capitalLd.getValue() : 10_000; }
     public long getStartDate() { return startDateLd.getValue() != null ? startDateLd.getValue() : 0L; }
     public boolean isConvertCurrency() { return convertCurrencyLd.getValue() != null && convertCurrencyLd.getValue(); }
-
     // Reload without clearing cache
     private void reload() { repo.fetchSignals(getInterval(), getCapital(), null); }
     // Filter logic
     private void applyFilter() {
         Set<String> sigF = sigFilterLd.getValue(), profF = profFilterLd.getValue();
         if ((sigF == null || sigF.size() == 3) && (profF == null || profF.size() == 5)) {
-            filteredSignals.setValue(allSignals); return; // No filter active
+            filteredSignals.setValue(sortedCopy(allSignals)); return;
         }
         List<Asset> out = new ArrayList<>();
         for (Asset a : allSignals) {
@@ -61,6 +64,13 @@ public class SignalViewModel extends AndroidViewModel {
             boolean profOk = profF == null || profF.contains(a.profile);
             if (sigOk && profOk) out.add(a);
         }
-        filteredSignals.setValue(out);
+        filteredSignals.setValue(sortedCopy(out));
     }
+    private List<Asset> sortedCopy(List<Asset> list) {
+        List<Asset> copy = new ArrayList<>(list);
+        if (sortOrder == SignalAdapter.SortOrder.BAYES_DESC) Collections.sort(copy, (a, b) -> Double.compare(b.bayesBuyScore, a.bayesBuyScore));
+        else if (sortOrder == SignalAdapter.SortOrder.BAYES_ASC) Collections.sort(copy, (a, b) -> Double.compare(a.bayesBuyScore, b.bayesBuyScore));
+        return copy;
+    }
+
 }

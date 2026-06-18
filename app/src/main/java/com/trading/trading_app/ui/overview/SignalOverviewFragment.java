@@ -119,20 +119,32 @@ public class SignalOverviewFragment extends Fragment {
         setupSortButton();
     }
     private void setupSortButton() {
+        // Restore button label from ViewModel state (survives fragment switch)
+        updateSortButtonLabel(vm.getSortOrder());
         binding.btnSortBayes.setOnClickListener(v -> {
-            SignalAdapter.SortOrder next; // Cyklus: DEFAULT → BAYES_DESC → BAYES_ASC → DEFAULT
-            switch (adapter.getSortOrder()) {
-                case DEFAULT: next = SignalAdapter.SortOrder.BAYES_DESC; break;
-                case BAYES_DESC: next = SignalAdapter.SortOrder.BAYES_ASC; break;
-                default: next = SignalAdapter.SortOrder.DEFAULT; break;
+            SignalAdapter.SortOrder next;
+            switch (vm.getSortOrder()) {
+                case DEFAULT:
+                    next = SignalAdapter.SortOrder.BAYES_DESC;
+                    break;
+                case BAYES_DESC:
+                    next = SignalAdapter.SortOrder.BAYES_ASC;
+                    break;
+                default:
+                    next = SignalAdapter.SortOrder.DEFAULT;
+                    break;
             }
-            adapter.setSortOrder(next);
-            switch (next) {
-                case BAYES_DESC: binding.btnSortBayes.setText("Bayes ↓"); break;
-                case BAYES_ASC: binding.btnSortBayes.setText("Bayes ↑"); break;
-                default: binding.btnSortBayes.setText("Výchozí ↕"); break;
-            }
+            vm.setSortOrder(next);          // stored in ViewModel — survives navigation
+            updateSortButtonLabel(next);
         });
+    }
+    private void updateSortButtonLabel(SignalAdapter.SortOrder order) {
+        if (binding == null) return;
+        switch (order) {
+            case BAYES_DESC: binding.btnSortBayes.setText("BUY score ↓"); break;
+            case BAYES_ASC: binding.btnSortBayes.setText("BUY score ↑"); break;
+            default: binding.btnSortBayes.setText("BUY score ↕"); break;
+        }
     }
     // Summary cards (BUY / SELL counts)
     private void setupSummaryCards() {
@@ -167,7 +179,7 @@ public class SignalOverviewFragment extends Fragment {
     // Observe ViewModel
     private void observeViewModel() {
         vm.getFilteredSignals().observe(getViewLifecycleOwner(), signals -> {
-            adapter.submitSortedList(signals);
+            adapter.submitList(signals);
             binding.tvEmptyState.setVisibility(signals == null || signals.isEmpty() ? View.VISIBLE : View.GONE);
         });
         vm.isLoading().observe(getViewLifecycleOwner(), loading -> {

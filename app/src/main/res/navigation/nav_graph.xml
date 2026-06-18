@@ -45,5 +45,9 @@
         android:id="@+id/nav_correlation"
         android:name="com.trading.trading_app.ui.correlation.CorrelationFragment"
         android:label="Correlation"/>
-
+    <!-- ── Alerts tab ──────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/nav_alerts"
+        android:name="com.trading.trading_app.ui.alerts.AlertsFragment"
+        android:label="Alerts"/>
 </navigation>

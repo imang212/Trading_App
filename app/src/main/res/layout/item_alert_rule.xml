@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <!-- Type badge -->
+            <TextView
+                android:id="@+id/tv_alert_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
+
+            <!-- Active toggle -->
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_alert_active"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/accent_blue"
+                app:trackTint="@color/bg_card2"/>
+
+            <!-- Delete button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete_alert"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✕"
+                android:textColor="@color/sell_red"
+                android:textSize="16sp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"/>
+
+        </LinearLayout>
+
+        <!-- Asset name + ticker -->
+        <TextView
+            android:id="@+id/tv_alert_asset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="2dp"/>
+
+        <!-- Threshold (for price alerts) -->
+        <TextView
+            android:id="@+id/tv_alert_threshold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"/>
+
+        <!-- Trigger count + last fired -->
+        <TextView
+            android:id="@+id/tv_alert_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/text_hint"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

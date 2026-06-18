@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ALERTS"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="+ New Alert"
+            android:textSize="12sp"
+            app:backgroundTint="@color/accent_blue"/>
+
+    </LinearLayout>
+
+    <!-- Empty state -->
+    <TextView
+        android:id="@+id/tv_alerts_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No alerts set.\nTap + New Alert or use the 🔔 button on an asset detail screen."
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:padding="40dp"
+        android:visibility="gone"/>
+
+    <!-- Alerts list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_alerts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="12dp"
+        android:clipToPadding="false"/>
+
+</LinearLayout>

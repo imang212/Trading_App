@@ -1,9 +1,15 @@
 package com.trading.trading_app.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu; import android.view.MenuItem;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -13,6 +19,7 @@ import com.trading.app.databinding.ActivityMainBinding;
 /**Single Activity host. Navigation handled by Navigation Component (switching between fragments). Bottom nav tabs: Signals | Detail | Orders | Backtest | Correlation*/
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding; private NavController navController;
+    private final ActivityResultLauncher<String> notifPermLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), granted -> {});
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +28,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
-        AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(R.id.nav_signals, R.id.nav_orders, R.id.nav_backtest, R.id.nav_correlation).build();
+        AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(R.id.nav_signals, R.id.nav_orders, R.id.nav_backtest, R.id.nav_correlation, R.id.nav_alerts).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
+        requestNotificationPermissionIfNeeded();
+    }
+    private void requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                notifPermLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { getMenuInflater().inflate(R.menu.menu_main, menu); return true; }

@@ -11,22 +11,9 @@ public class SignalAdapter extends ListAdapter<Asset, SignalAdapter.ViewHolder> 
     public interface OnAssetClickListener { void onClick(Asset asset); }
     public enum SortOrder { DEFAULT, BAYES_DESC, BAYES_ASC }
     private final OnAssetClickListener listener;
-    private SortOrder sortOrder = SortOrder.DEFAULT;
     private List<Asset> originalList = new ArrayList<>();
     public SignalAdapter(OnAssetClickListener listener) { super(DIFF_CALLBACK); this.listener = listener; }
     /** Called from Fragment — keeps original list for re-sorting */
-    public void submitSortedList(List<Asset> list) {
-        originalList = list != null ? new ArrayList<>(list) : new ArrayList<>();
-        applySort();
-    }
-    public void setSortOrder(SortOrder order) { this.sortOrder = order; applySort(); }
-    public SortOrder getSortOrder() { return sortOrder; }
-    private void applySort() {
-        List<Asset> sorted = new ArrayList<>(originalList);
-        if (sortOrder == SortOrder.BAYES_DESC) { Collections.sort(sorted, (a, b) -> Double.compare(bestScore(b), bestScore(a))); }
-        else if (sortOrder == SortOrder.BAYES_ASC) { Collections.sort(sorted, (a, b) -> Double.compare(bestScore(a), bestScore(b))); }
-        submitList(sorted);
-    }
     /** Unified 0–10 score used for sorting. 10 = strongest BUY, 0 = strongest SELL, 5 = neutral. All assets are comparable on the same scale regardless of signal type.*/
     private double bestScore(Asset a) { return a.bayesBuyScore; }
     @NonNull @Override
